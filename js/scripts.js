@@ -31,11 +31,20 @@ The loop is set until reaching the same length as the array. Because the item "E
 after it.
 */
 
-for (let i = 0; i < pokemonList.length; i++) {
-  
-  if (pokemonList[i].height >= 1.5) {
-    document.write(pokemonList[i].name + " (height: " + pokemonList[i].height + ") " + "This is a big guy!")
-  } else {
-    document.write(pokemonList[i].name + " (height: " + pokemonList[i].height + ") ")
+// I replaced the foor loop with this forEach loop
+pokemonList.forEach(function(pokemon) {
+  document.write(pokemon.name + ' is ' + pokemon.height + ' tall ' + ( '<br>'));
+});
+
+function divide(dividend, divisor){
+  if(divisor === 0){
+    return "You’re trying to divide by zero."
+  }else{
+    let result = dividend / divisor;
+    return result;
   }
 }
+
+
+
+let pokemonRepository;
