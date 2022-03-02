@@ -1,23 +1,3 @@
-let pokemonList = [
-  {
-    name: "Bulbasaur",
-    height: 0.7,
-    weight: 6.9,
-    types: ["grass", "poison"],
-  },
-  {
-    name: "Exploud",
-    height: 1.5,
-    weight: 84,
-    types: ["normal"],
-  },
-  {
-    name: "Jynx",
-    height: 1.4,
-    weight: 40.6,
-    type: ["psychic", "ice"],
-  },
-];
 
 /* In the frist line below, I first start defining the framework of the for loop - consisiting of three parts.
 The first part is the initialization, "let i = 0;" 
@@ -31,10 +11,7 @@ The loop is set until reaching the same length as the array. Because the item "E
 after it.
 */
 
-// I replaced the foor loop with this forEach loop
-pokemonList.forEach(function(pokemon) {
-  document.write(pokemon.name + ' is ' + pokemon.height + ' tall ' + ( '<br>'));
-});
+
 
 function divide(dividend, divisor){
   if(divisor === 0){
@@ -45,6 +22,44 @@ function divide(dividend, divisor){
   }
 }
 
+let pokemonRepository = (function () {
+  let pokemonList = [
+    {
+      name: "Bulbasaur",
+      height: 0.7,
+      weight: 6.9,
+      types: ["grass", "poison"],
+    },
+    {
+      name: "Exploud",
+      height: 1.5,
+      weight: 84,
+      types: ["normal"],
+    },
+    {
+      name: "Jynx",
+      height: 1.4,
+      weight: 40.6,
+      type: ["psychic", "ice"],
+    },
+  ];
 
+  return {
+    add: function(pokemon) {
+      pokemonList.push(pokemon);
+    },
+    getAll: function() {
+      return pokemonList;
+    }
+  };
+})();
 
-let pokemonRepository;
+// I replaced the foor loop with this forEach loop
+pokemonRepository.getAll().forEach(function(pokemon) {
+  document.write(pokemon.name + ' is ' + pokemon.height + ' tall ' + ( '<br>'));
+});
+
+console.log(pokemonRepository.getAll());
+pokemonRepository.add({ name: 'Bulbasaur' });
+console.log(pokemonRepository.getAll());
+
