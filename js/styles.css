@@ -1,6 +1,6 @@
-.pokemon-list {
+#pokemon-list {
     background-color: white;
-    color: black;
+    color: rgb(230, 21, 21);
     margin: 4px 2px;
     padding: 16px 32px;
     text-align: center;
@@ -11,4 +11,9 @@
     transition-duration: 0.4s;
     cursor: pointer;
     border: 2px solid purple;
+}
+
+button {
+background-color: beige;
+width: 50px;
 }

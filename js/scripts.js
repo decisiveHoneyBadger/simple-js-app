@@ -14,20 +14,19 @@ after it.
 function divide(dividend, divisor){
   if(divisor === 0){
     return "You’re trying to divide by zero."
-  }else{
+  } else {
     let result = dividend / divisor;
     return result;
   }
 }
 
-// this is the beginning of the IIFE
-let pokemonRepository = (function () {
+
   let pokemonList = [
     {
-      name: "Bulbasaur",
-      height: 0.7,
-      weight: 6.9,
-      types: ["grass", "poison"],
+      name: "Xatu",
+      height: 1.5,
+      weight: 15,
+      types: ["psychic", "flying"],
     },
     {
       name: "Exploud",
@@ -36,21 +35,65 @@ let pokemonRepository = (function () {
       types: ["normal"],
     },
     {
-      name: "Jynx",
-      height: 1.4,
-      weight: 40.6,
-      types: ["psychic", "ice"],
+      name: "Hypno",
+      height: 1.6,
+      weight: 75.6,
+      types: ["psychic"],
     },
     {
-      name: "Bulbasar",
-      height: 0.7,
-      weight: 6.9,
-      types: ["grass", "poison"],
+      name: "Slaking",
+      height: 2.0,
+      weight: 130.5,
+      types: ["normal"],
+    },
+    {
+      name: "Zekrom",
+      height: 2.9,
+      weight: 345,
+      types: ["dragon", "electric"],
+    },
+    {
+      name: "Ho-oh",
+      height: 3.8,
+      weight: 199,
+      types: ["fire", "flying"],
+    },
+    {
+      name: "Deoxys",
+      height: 1.7,
+      weight: 60.8,
+      types: ["psychic"],
+    },
+    {
+      name: "Giratina",
+      height: 4.5,
+      weight: 750,
+      types: ["dragon", "ghost"],
+    },
+    {
+      name: "Absol",
+      height: 1.2,
+      weight: 47,
+      types: ["dark"],
+    },
+    {
+      name: "Yamask",
+      height: 0.5,
+      weight: 1.5,
+      types: ["ghost"],
     }
-  ];
+  ]
+
 
   function getAll() {
     return pokemonList;
+  }
+  function addListItem() {
+    return {
+      add: add,
+      getAll: getAll,
+      addListItem: addListItem
+    };
   }
  
   /**
@@ -60,14 +103,21 @@ let pokemonRepository = (function () {
    * @param {*} pokemon this is the pokemon object
    */
   function addValidate(pokemon) {
-    if (typeof pokemon === 'object' && !Array.isArray(pokemon)) {
-      if ((Object.keys(pokemon)[0] === 'name' && typeof Object.values(pokemon)[0] === 'string') &&
+    if (typeof(pokemon) === 'object' && !Array.isArray(pokemon)) { 
+      if ((Object.keys(pokemon)[0] === 'name' && typeof Object.values(pokemon)[0] === 'string') && 
           (Object.keys(pokemon)[1] === 'height' && typeof Object.values(pokemon)[1] === 'number') &&
           (Object.keys(pokemon)[2] === 'weight' && typeof Object.values(pokemon)[2] === 'number') &&
-          (Object.keys(pokemon)[3] === 'types' && Array.isArray(Object.values(pokemon)[3]))) {
-            pokemonList.push(pokemon);
-      } else {
-        window.alert('this is not a valid pokemon object');
+          (Object.keys(pokemon)[3] === 'types' && Array.isArray(Object.values(pokemon)[3])) &&
+          (Object.keys(pokemon)[4] === 'name' && typeof Object.values(pokemon)[4] === 'string') &&
+          (Object.keys(pokemon)[5] === 'height' && typeof Object.values(pokemon)[5] === 'number') &&
+          (Object.keys(pokemon)[6] === 'weight' && typeof Object.values(pokemon)[6] === 'number') &&
+          (Object.keys(pokemon)[7] === 'types' && Array.isArray(Object.values(pokemon)[7])) &&
+          (Object.keys(pokemon)[8] === 'name' && typeof Object.values(pokemon)[8] === 'string') &&
+          (Object.keys(pokemon)[9] === 'height' && typeof Object.values(pokemon)[9] === 'number')) {
+            pokemonList.push(pokemon)
+            } 
+      else {
+        alert('this is not a valid pokemon object');
       }
     }
   }
@@ -102,9 +152,9 @@ function addListItem(pokemon) {
  * @param {*} button refers to the declared button above
  * @param {*} pokemon refers to the pokemon object
  */
-function showDetails(click, button, pokemon) {
-  alert(`Hey, it's me`);
-}
+//function showDetails(click, button, pokemon) {
+ // alert(`Hey, it's me`);
+//}
 }
 
 // adds a function
@@ -112,37 +162,44 @@ function showDetails(pokemon) {
   console.log(pokemon);
 }
 // makes the functions public (usable) and accessable
-  return {
-    addValidate: addValidate,
-    getAll: getAll,
-    findPokemon: findPokemon,
-    addListItem: addListItem,
-    showDetails: showDetails
-  };
-})();
+function main(){
+  pokemonList.forEach((pokemon)=>{
+      var ul = document.getElementById("pokemon-list");
+      var li = document.createElement("button");
+      li.setAttribute("id",pokemon["name"])
+      li.onclick = function(){
+        alert("My name is " + pokemon.name+" and my special power is "+pokemon.types);
+        console.log(pokemon.name)
+
+      }
+      var break1 = document.createElement("br");
+      var break2 = document.createElement("br")
+      li.appendChild(document.createTextNode(pokemon["name"]))
+      ul.appendChild(li);
+      ul.appendChild(break1);
+      ul.appendChild(break2);  })
+  // return {
+  //   addValidate: addValidate,
+  //   getAll: getAll,
+  //   findPokemon: findPokemon,
+  //   addListItem: addListItem,
+  //   showDetails: showDetails
+  // }
+}//})();
 
 // adding a valid pokemon to pokemonList in pokemonRepository (IIFE)
-pokemonRepository.addValidate({ name:'pokemon', height: 1.2, weight: 20.6, types: ['fire']});
-console.log(pokemonRepository.getAll());
-console.log(pokemonRepository.findPokemon('Bul'));
-pokemonRepository.addValidate({ name: 1, height: 1.2, weight: 20.6, types: ['fire']});
+// pokemonRepository.addValidate({ name:'pokemon', height: 1.2, weight: 20.6, types: ['fire']});
+// console.log(pokemonRepository.getAll());
+// console.log(pokemonRepository.findPokemon('Bul'));
+// pokemonRepository.addValidate({ name: 1, height: 1.2, weight: 20.6, types: ['fire']});
 
-// DOM manipulation
-pokemonRepository.getAll().forEach(function(pokemon) {
-  pokemonRepository.addListItem(pokemon);
-});
-
+// // DOM manipulation
+// pokemonRepository.getAll().forEach(function(pokemon) {
+//  pokemonRepository.addListItem(pokeomon);
 
 
 
 
-/*
-
-*/
-
-
-
-
-
-
-
+//   pokemonRepository.addListItem(pokemon);
+//   pokemonList.push(pokemon);
+// });
