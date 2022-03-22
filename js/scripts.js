@@ -1,15 +1,3 @@
-/* In the frist line below, I first start defining the framework of the for loop - consisiting of three parts.
-The first part is the initialization, "let i = 0;" 
-followed by the condition, "i < pokemonList.length;" 
-and finally the action part, "i++" 
-
-Then, I begin writing a DOM through document.write() in order to display the name and height of the above array's items.
-The height is supposed to be shown just next to the name: “Bulbasaur (height: 7)”
-The loop is set until reaching the same length as the array. Because the item "Exploud" is exactly
-1.5 height tall, it fulfills the condition. Therefore, the string, "This is a big guy!", is being shown right
-after it.
-*/
-
 function divide(dividend, divisor) {
   if (divisor === 0) {
     return "You’re trying to divide by zero.";
@@ -19,6 +7,8 @@ function divide(dividend, divisor) {
   }
 }
 
+
+// here starts the IIFE
 let pokemonRepository = (function () {
   let pokemonList = [];
   // this is the list of pokemons
@@ -40,9 +30,7 @@ let pokemonRepository = (function () {
   }
 
   function getAll() {
-    console.log('test2');
     return pokemonList;
-   
   }
 
   /**
@@ -62,10 +50,8 @@ let pokemonRepository = (function () {
    * @param {*} pokemon to add to the list
    */
   function addListItem(pokemon) {
-    console.log('test3');
     let pokemonList = document.querySelector(".pokemon-list");
     let listItem = document.createElement("li");
-    
     let button = document.createElement("button");
     button.innerText = pokemon.name;
     button.classList.add("button");
@@ -94,7 +80,6 @@ let pokemonRepository = (function () {
           };
           addValidate(pokemon);
           console.log(pokemon);
-          console.log('test');
         });
       })
       .catch(function (e) {
@@ -102,19 +87,46 @@ let pokemonRepository = (function () {
       });
   }
 
+
+  function loadDetails(item) {
+    let url = item.detailsUrl;
+    return fetch(url).then(function (response) {
+      return response.json();
+    }).then(function (details) {
+      // Now we add the details to the item
+      item.imageUrl = details.sprites.front_default;
+      item.height = details.height;
+      item.types = details.types;
+    }).catch(function (e) {
+      console.error(e);
+    });
+  }
   
 
   // this function should get a Pokémon’s details logged to the console when clicking the button.
   function showDetails(item) {
-      console.log(`Hey, my name is ${item.name}`);
+    pokemonRepository.loadDetails(item).then(function () {
+      console.log(`Hey, my name is ${item.name} and my height is ${item.height}`);
+    }); 
   }
+
+
+  showLoadingMessage() 
+  
+  
+  hideLoadingMessage()
+
+
+
+
 
   return {
     addValidate: addValidate,
     getAll: getAll,
     addListItem: addListItem,
     loadList: loadList,
-    showDetails: showDetails,
+    loadDetails: loadDetails,
+    showDetails: showDetails
   };
 })();
 
