@@ -94,17 +94,17 @@ let pokemonRepository = (function () {
   //exercise 1.8 the modal container
 
   function showModal(item) {
-    let modalTitle = $('.modal-header');
-    let modalBody = $('.modal-body');
+    let modalTitle = window.$('.modal-header');
+    let modalBody = window.$('.modal-body');
 
     modalTitle.empty();
     modalBody.empty();
 
-    let nameElement = $('<h1>' + item.name + '</h1>');
-    let imageElementFront = $('<img class ="modal-img" style="width:50%">');
+    let nameElement = window.$('<h1>' + item.name + '</h1>');
+    let imageElementFront = window.$('<img class ="modal-img" style="width:50%">');
     imageElementFront.attr('src', item.imageUrl);
 
-    let heightElement = $('<p>' + 'height : ' + item.height + '</p>');
+    let heightElement = window.$('<p>' + 'height : ' + item.height + '</p>');
 
     let typeElement = document.createElement('p');
     let typeArray = item.types.map(function (index) {
