@@ -91,20 +91,23 @@ let pokemonRepository = (function () {
       showModal(pokemon);
     });
   }
-  //exercise 1.8 the modal container
 
+  //exercise 1.8 the modal container
   function showModal(item) {
-    let modalTitle = window.$('.modal-header');
-    let modalBody = window.$('.modal-body');
+    let modalTitle = $('.modal-title');
+    let modalBody = $('.modal-body');
 
     modalTitle.empty();
     modalBody.empty();
 
-    let nameElement = window.$('<h1>' + item.name + '</h1>');
-    let imageElementFront = window.$('<img class ="modal-img" style="width:50%">');
+    modalTitle.text(item.name);
+
+    let imageElementFront = window.$(
+      '<img class ="modal-img" style="width:50%">'
+    );
     imageElementFront.attr('src', item.imageUrl);
 
-    let heightElement = window.$('<p>' + 'height : ' + item.height + '</p>');
+    let heightElement = $('<p>' + 'height : ' + item.height + '</p>');
 
     let typeElement = document.createElement('p');
     let typeArray = item.types.map(function (index) {
@@ -113,15 +116,13 @@ let pokemonRepository = (function () {
 
     typeElement.innerText = 'type:';
     typeArray.forEach(function (type) {
-      typeElement.innerText += ' ' + type;
+      typeElement.innerText += ' '  + type;
     });
 
-    modalTitle.append(nameElement);
     modalBody.append(imageElementFront);
     modalBody.append(heightElement);
     modalBody.append(typeElement);
   }
-
   return {
     add: add,
     getAll: getAll,
