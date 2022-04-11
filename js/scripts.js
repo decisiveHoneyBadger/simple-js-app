@@ -123,6 +123,7 @@ let pokemonRepository = (function () {
     modalBody.append(heightElement);
     modalBody.append(typeElement);
   }
+  
   return {
     add: add,
     getAll: getAll,

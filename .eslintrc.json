@@ -1,7 +1,10 @@
 {
     "env": {
         "browser": true,
-        "es2021": true
+        "es2021": true,
+        "commonjs": true,
+        "es6": true,
+        "jquery": true
     },
     "extends": "eslint:recommended",
     "parserOptions": {
@@ -12,4 +15,6 @@
         "semi": [2, "always"],
         "quotes": [2, "single", { "avoidEscape": true }]
     }
+
+    
 }
