@@ -25,4 +25,4 @@ This Pokédex is a simple web application built with,primarily JavaScript, inclu
 
 ## 🌱 Live Demo
 
-Check it out [here]
+Check it out [here](https://decisivehoneybadger.github.io/simple-js-app/)
